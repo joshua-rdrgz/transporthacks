@@ -19,7 +19,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    --primary: 0 0% 9%;
+    --primary: 217 91.2% 59.8%; /* bg-blue-500 */
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 96.1%;
@@ -28,7 +28,7 @@
     --muted: 0 0% 89.8%; /* bg-neutral-200 */
     --muted-foreground: 0 0% 45.1%;
 
-    --accent: 217 91.2% 59.8%; /* bg-blue-500 */
+    --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -51,7 +51,7 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%;
+    --primary: 221 83.2% 53.3%; /* bg-blue-600 */
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 14.9%;
@@ -60,7 +60,7 @@
     --muted: 0 0% 25.1%; /* bg-neutral-700 */
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 221 83.2% 53.3%; /* bg-blue-600 */
+    --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -83,9 +83,9 @@
 
 /* For Active Navlinks */
 .active {
-  background-color: hsl(var(--accent));
+  background-color: hsl(var(--primary));
 }
 
 .active:hover {
-  background-color: hsl(var(--accent) / 0.9) !important;
+  background-color: hsl(var(--primary) / 0.9) !important;
 }
