@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 app = FastAPI()
 
 class request_body(BaseModel):
-    engine_rpm : int
+    engine_rpm : float
     lub_oil_pressure : float
     fuel_pressure : float
     coolant_pressure : float
@@ -34,7 +34,7 @@ y['engine condition'] = df_engine['Engine Condition']
 
 
 
-model = LogisticRegression()
+model = LogisticRegression(random_state=0)
 
 model.fit(X, y)
 
@@ -54,7 +54,6 @@ def predict(data : request_body):
     ]]
      
     # Predicting the Class
-    class_idx = model.predict(test_data)[0]
-     
+    class_idx = (model.predict(test_data))
     # Return the Result
-    return { 'class' : class_idx}
+    return { 'class' : float(class_idx[0])}
