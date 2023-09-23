@@ -1,0 +1,38 @@
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserStatus {
+  driver
+  commuter
+}
+
+model User {
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  status       UserStatus
+  startPointId String
+  endPointId   String
+
+  startPoint Location @relation("StartPoint", fields: [startPointId], references: [id], map: "startPointLocationId")
+  endPoint   Location @relation("EndPoint", fields: [endPointId], references: [id], map: "endPointLocationId")
+
+  @@index([startPointId])
+  @@index([endPointId])
+}
+
+model Location {
+  id         String @id @default(cuid())
+  lat        Float
+  lng        Float
+  startUsers User[] @relation("StartPoint")
+  endUsers   User[] @relation("EndPoint")
+}
