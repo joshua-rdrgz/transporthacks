@@ -1,6 +1,9 @@
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# ALL
+node_modules
+
 # CLIENT dependencies
 /packages/client/node_modules
 /packages/client/.pnp
