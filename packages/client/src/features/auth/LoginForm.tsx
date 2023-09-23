@@ -61,11 +61,13 @@ export const LoginForm = () => {
           router.replace('/');
         }
       } catch (err: any) {
-        console.error('err: ', err.message);
+        console.error('🔥🔥🔥 ERROR 🔥🔥🔥 : ', err.message);
         toast.error(err.message as string);
+      } finally {
+        loginForm.reset();
       }
     },
-    [router]
+    [router, loginForm]
   );
 
   return (
@@ -88,7 +90,7 @@ export const LoginForm = () => {
           />
         ))}
 
-        <Button variant='destructive'>Log in</Button>
+        <Button>Log in</Button>
       </form>
     </Form>
   );
