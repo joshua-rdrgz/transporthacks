@@ -2,6 +2,12 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../app/api/auth/[...nextauth]/route';
 import prisma from '@/lib/prisma';
 
+export type TCurrentUser = {
+  id: string;
+  name: string;
+  email: string;
+} | null;
+
 export async function getSession() {
   return await getServerSession(authOptions);
 }
@@ -28,7 +34,7 @@ export async function getCurrentUser() {
       id: currentUser.id,
       name: currentUser.name,
       email: currentUser.email,
-    };
+    } as TCurrentUser;
   } catch (err: any) {
     return null;
   }
