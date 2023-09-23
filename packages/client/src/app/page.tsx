@@ -1,19 +1,7 @@
-import { LoginForm } from '@/features/auth/LoginForm';
-import { ModeToggle } from '@/features/theme/ModeToggle';
-import { AuthPageLayout } from '@/ui/auth-page-layout';
+import { getCurrentUser } from '@/services/apiAuth';
 
-export default function HomePage() {
-  return (
-    <main>
-      <ModeToggle />
-      <AuthPageLayout
-        formTitle='Welcome to CoRide!'
-        formSubtitle='Find your commuting partner today!'
-        formComponent={<LoginForm />}
-        footerLabel="Haven't registered?"
-        footerLinkLabel='Sign up here'
-        footerLinksTo='/signup'
-      />
-    </main>
-  );
+export default async function HomePage() {
+  const user = await getCurrentUser();
+  console.log('USER: ', user);
+  return <main>protected content</main>;
 }
