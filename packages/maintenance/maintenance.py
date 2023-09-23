@@ -34,7 +34,7 @@ y['maintainence_cost'] = df_maintenance['maintainence_cost']
 
 
 
-model = MLPRegressor()
+model = MLPRegressor(random_state=0)
 
 model.fit(X, y)
 
@@ -54,7 +54,7 @@ def predict(data : request_body):
     ]]
      
     # Predicting the Class
-    class_idx = model.predict(test_data)[0]
+    class_idx = model.predict(test_data)
      
     # Return the Result
-    return { 'class' : class_idx}
+    return { 'class' : abs(class_idx[0])}
