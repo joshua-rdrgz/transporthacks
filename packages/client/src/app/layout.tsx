@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute='class' defaultTheme='system'>
           <ToasterProvider />
-          {children}
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>
