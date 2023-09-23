@@ -59,7 +59,9 @@ export const MatchesClient: React.FC<IMatchesClientProps> = ({
           </h2>
           <div className='flex flex-col gap-5'>
             {DUMMY_POTENTIAL_MATCHES.map((match) => {
-              return <Match key={match.name} match={match} />;
+              return (
+                <Match key={match.name} match={match} status='potential' />
+              );
             })}
           </div>
         </section>
@@ -67,7 +69,7 @@ export const MatchesClient: React.FC<IMatchesClientProps> = ({
           <h2 className='text-2xl font-semibold mb-3'>Your Official Matches</h2>
           <div className='flex flex-col gap-5'>
             {DUMMY_OFFICIAL_MATCHES.map((match) => {
-              return <Match key={match.name} match={match} />;
+              return <Match key={match.name} match={match} status='official' />;
             })}
           </div>
         </section>
