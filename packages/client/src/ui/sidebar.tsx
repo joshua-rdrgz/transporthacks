@@ -41,7 +41,7 @@ export const Sidebar = () => {
                     pathname === navItem.link ? 'active' : ''
                   }`}
                 >
-                  <Icon className='text-accent group-hover/li:text-accent-foreground group-[.active]/link:text-accent-foreground' />
+                  <Icon className='text-primary group-[.active]/link:text-accent-foreground' />
                   <span>{navItem.label}</span>
                 </Link>
               </li>
