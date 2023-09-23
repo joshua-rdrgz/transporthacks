@@ -14,25 +14,33 @@ enum UserStatus {
 }
 
 model User {
-  id           String     @id @default(cuid())
+  id           String @id @default(cuid())
   name         String
-  email        String     @unique
+  email        String @unique
   passwordHash String
+
+  preference Preference?
+}
+
+model Preference {
+  userId       String     @id
   status       UserStatus
   startPointId String
   endPointId   String
 
+  user       User     @relation(fields: [userId], references: [id])
   startPoint Location @relation("StartPoint", fields: [startPointId], references: [id], map: "startPointLocationId")
   endPoint   Location @relation("EndPoint", fields: [endPointId], references: [id], map: "endPointLocationId")
 
+  @@index([userId])
   @@index([startPointId])
   @@index([endPointId])
 }
 
 model Location {
-  id         String @id @default(cuid())
+  id         String       @id @default(cuid())
   lat        Float
   lng        Float
-  startUsers User[] @relation("StartPoint")
-  endUsers   User[] @relation("EndPoint")
+  startUsers Preference[] @relation("StartPoint")
+  endUsers   Preference[] @relation("EndPoint")
 }
