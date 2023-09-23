@@ -46,26 +46,22 @@ export const LoginForm = () => {
 
   const onSubmit = useCallback(
     async (values: LoginFormSchema) => {
-      console.log('onSubmit fired!');
       let error: SignInResponse['error'];
       try {
-        console.log('beginning to sign in');
         const res = await signIn('credentials', {
           ...values,
           redirect: false,
         });
         if (res?.error) {
-          console.log('error signing in');
           error = res.error;
           throw new Error(res.error);
         }
         if (res?.ok) {
           toast.success('Logged in!');
-          router.refresh();
+          router.replace('/');
         }
       } catch (err: any) {
-        console.log('caught an error');
-        console.log('err: ', err.message);
+        console.error('err: ', err.message);
         toast.error(err.message as string);
       }
     },
