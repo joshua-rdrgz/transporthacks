@@ -109,7 +109,7 @@ export const SignupForm = () => {
           />
         ))}
 
-        <Button variant='destructive'>Sign up</Button>
+        <Button>Sign up</Button>
       </form>
     </Form>
   );
