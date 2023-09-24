@@ -3,11 +3,19 @@
 import { Button } from '@/ui/button';
 import { DisplayMap } from '@/ui/display-map';
 
-interface IMatch {
+export interface IMatch {
   name: string;
   email: string;
-  startPoint: string;
-  endPoint: string;
+  startPoint: {
+    lat: number;
+    lng: number;
+  };
+  endPoint: {
+    lat: number;
+    lng: number;
+  };
+  startAddress: string;
+  endAddress: string;
 }
 
 interface IMatchProps {
@@ -25,12 +33,12 @@ export const Match: React.FC<IMatchProps> = ({ match, status }) => {
             <strong>Email:</strong> {match.email}
           </p>
           <p className='text-sm'>
-            <strong>Start Point:</strong> {match.startPoint}
+            <strong>Start Point:</strong> {match.startAddress}
           </p>
           <p className='text-sm'>
-            <strong>End Point:</strong> {match.endPoint}
+            <strong>End Point:</strong> {match.endAddress}
           </p>
-          {/* <DisplayMap startPoint={match.startPoint} endPoint={match.endPoint} /> */}
+          <DisplayMap startPoint={match.startPoint} endPoint={match.endPoint} />
         </div>
         <div className='flex gap-3 items-center mx-auto'>
           <Button
