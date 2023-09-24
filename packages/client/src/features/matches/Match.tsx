@@ -59,14 +59,9 @@ export const Match: React.FC<IMatchProps> = ({ match, status }) => {
       {status === 'potential' && (
         <div>
           <p className='text-sm'>
-            <strong>AI Prediction of Driver Vehicle Condition</strong>: Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Eget felis eget
-            nunc lobortis mattis aliquam faucibus purus in. Molestie at
-            elementum eu facilisis sed. Mauris commodo quis imperdiet massa
-            tincidunt nunc pulvinar sapien. Erat imperdiet sed euismod nisi. Id
-            aliquet risus feugiat in ante metus dictum. Maecenas pharetra
-            convallis posuere morbi leo.
+            <strong>Our Machine Learning platform&apos;s thoughts</strong>: This
+            car is likely costly to maintain. Make sure you have the dough to
+            spend for this commute!
           </p>
         </div>
       )}

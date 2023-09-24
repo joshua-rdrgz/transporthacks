@@ -38,7 +38,13 @@ export const Logo: React.FC<ILogoProps> = ({ figureClassName, size }) => {
 
   return (
     <figure className={cn('mx-auto', figureClassName)}>
-      <Image src={src} alt='Logo of Budgetbook' width={size} height={size} />
+      <Image
+        src={src}
+        alt='Logo of Budgetbook'
+        width={size}
+        height={size}
+        priority
+      />
     </figure>
   );
 };

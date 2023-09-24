@@ -16,11 +16,11 @@ const NAV_ITEMS = [
     icon: Settings2,
     link: '/preferences',
   },
-  {
-    label: 'User Settings',
-    icon: Settings,
-    link: '/settings',
-  },
+  // {
+  //   label: 'User Settings',
+  //   icon: Settings,
+  //   link: '/settings',
+  // },
 ];
 
 export const Sidebar = () => {

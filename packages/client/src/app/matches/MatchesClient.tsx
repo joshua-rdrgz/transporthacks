@@ -1,6 +1,8 @@
 'use client';
 
 import { IMatch, Match } from '@/features/matches/Match';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const DUMMY_POTENTIAL_MATCHES = [
   {
@@ -65,6 +67,14 @@ const DUMMY_OFFICIAL_MATCHES = [
 ];
 
 export const MatchesClient = () => {
+  useEffect(() => {
+    async function fetch() {
+      const res = await axios.post('/api/matches');
+      return res;
+    }
+
+    fetch().then((res) => console.log('res from MatchesClient: ', res));
+  }, []);
   return (
     <>
       <h1 className='text-5xl font-bold text-center'>Find a Partner</h1>
