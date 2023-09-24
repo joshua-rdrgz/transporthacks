@@ -31,10 +31,10 @@ export const Logo: React.FC<ILogoProps> = ({ figureClassName, size }) => {
     theme === 'system'
       ? systemTheme === 'dark'
         ? '/logo-white.svg'
-        : '/logo-color.svg'
+        : '/logo-black.svg'
       : theme === 'dark'
       ? '/logo-white.svg'
-      : '/logo-color.svg';
+      : '/logo-black.svg';
 
   return (
     <figure className={cn('mx-auto', figureClassName)}>
