@@ -47,7 +47,15 @@ export async function getAddressFromLatLng(lat?: number, lng?: number) {
   geoCodeUrl.search = geoCodeUrlParams.toString();
 
   const geocodeResponse = await axios.get(geoCodeUrl.toString());
+
+  if (!geocodeResponse.data.results[0])
+    throw new Error('Something went wrong.....');
+
   const formattedAddress = geocodeResponse.data.results[0].formatted_address;
 
   return formattedAddress;
+}
+
+export function allCapsToFirstLetterCapitalized(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
