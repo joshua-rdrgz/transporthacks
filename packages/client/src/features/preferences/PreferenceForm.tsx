@@ -15,10 +15,7 @@ import { DisplayMap } from '@/ui/display-map';
 import { Label } from '@/ui/label';
 import { Input } from '@/ui/input';
 import axios from 'axios';
-import {
-  TUserPreferenceProps,
-  useUserPreferences,
-} from '@/context/user-preference-context';
+import { useUserPreferences } from '@/context/user-preference-context';
 import { useRouter } from 'next/navigation';
 
 const preferenceFormSchema = z.object({
@@ -41,8 +38,6 @@ const LOCATION_INPUTS = [
   },
 ];
 
-type Status = 'driver' | 'commuter';
-
 export const PreferenceForm = () => {
   const router = useRouter();
   const currentUser = useCurrentUser();
@@ -61,7 +56,6 @@ export const PreferenceForm = () => {
 
   const onSubmit = useCallback(
     async (values: PreferenceFormSchema) => {
-      console.log('onSubmit fired');
       const startPointLatlng = await getLatLngForAddress(values.startPoint);
       const endPointLatlng = await getLatLngForAddress(values.endPoint);
 
