@@ -28,7 +28,7 @@ export const Sidebar = () => {
 
   return (
     <aside className='row-span-full pt-5 px-4 flex flex-col gap-12 bg-secondary'>
-      <Logo figureClassName='w-full' />
+      <Logo figureClassName='w-full' size={200} />
       <nav>
         <ul className='flex flex-col gap-6'>
           {NAV_ITEMS.map((navItem) => {

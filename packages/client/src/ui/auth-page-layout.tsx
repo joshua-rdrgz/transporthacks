@@ -27,9 +27,9 @@ export const AuthPageLayout: React.FC<IAuthPageLayoutProps> = ({
       <div className='text-right p-3'>
         <ModeToggle />
       </div>
-      <div className='flex flex-col justify-between min-h-screen py-10 px-7 text-center bg-secondary'>
-        <header className='text-4xl'>
-          <Logo figureClassName='w-1/3' />
+      <div className='flex flex-col justify-start gap-5 min-h-screen text-center bg-secondary'>
+        <header>
+          <Logo figureClassName='flex justify-center' size={200} />
         </header>
         <main>
           <div className='flex flex-col gap-4'>
