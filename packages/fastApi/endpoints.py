@@ -130,15 +130,16 @@ def predict_maintenance(data : request_body_maint):
 #Matching 
 
 ## Load the drivers' data from the CSV file
+# Load the drivers' data from the CSV file
 travel_df = pd.read_csv('Travel.csv')
 users_df = pd.read_csv('Users.csv')
 
 # Define the request data structure
 class UserRequestBody(BaseModel):
-    balance: float
-    reputation: float
-    preferred_latitude: float
-    preferred_longitude: float
+    startPlace_latitude: float
+    startPlace_longitude: float
+    endPlace_latitude: float
+    endPlace_longitude: float
 
 # ... [Include the haversine_distance and find_best_match_for_user functions here] ...
 def find_best_match_for_user (user, df, users_df):
@@ -172,7 +173,15 @@ def find_best_match_for_user (user, df, users_df):
 @app.post('/match_driver')
 def match_driver(data: UserRequestBody):
     # Convert the request data to a pandas Series (to be compatible with our existing function)
-    user_series = pd.Series([data]) ############## Only not sure
+    
+    test_data_match = [
+            data.startPlace_latitude,
+            data.startPlace_longitude,
+            data.endPlace_latitude,
+            data.endPlace_longitude
+    ]
+    
+    user_series = pd.Series(test_data_match) ############## Only not sure
     
     # Use the matching function to get the matched driver's ID
     matched_driver_id = find_best_match_for_user(user_series, travel_df, users_df)
