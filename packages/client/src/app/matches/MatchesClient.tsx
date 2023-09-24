@@ -82,16 +82,12 @@ export const MatchesClient = () => {
         <section>
           <h2 className='text-2xl font-semibold mb-3'>Your Official Matches</h2>
           <div className='flex flex-col gap-5'>
-            {DUMMY_OFFICIAL_MATCHES.map((match) =>
-              displayMatch(match, 'official')
-            )}
+            {DUMMY_OFFICIAL_MATCHES.map((match) => (
+              <Match key={match.name} match={match} status='official' />
+            ))}
           </div>
         </section>
       </div>
     </>
   );
 };
-
-async function displayMatch(match: IMatch, status: 'potential' | 'official') {
-  return <Match key={match.name} match={match} status={status} />;
-}

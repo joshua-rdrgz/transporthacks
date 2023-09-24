@@ -30,8 +30,7 @@ export async function getLatLngForAddress(address: string) {
 }
 
 export async function getAddressFromLatLng(lat?: number, lng?: number) {
-  if (!lat || !lng)
-    return 'Unable to process coordinates, please pass both `lat` and `lng`.';
+  if (!lat || !lng) return 'Please enter an address here to get started!';
 
   const geoCodeUrl = new URL(
     'https://maps.googleapis.com/maps/api/geocode/json'

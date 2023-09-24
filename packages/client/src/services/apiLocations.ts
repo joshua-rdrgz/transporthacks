@@ -42,6 +42,7 @@ export async function updateLocation(id: string, location: any) {
       },
       data: location,
     });
+    console.log('updatedLocation: ', updatedLocation);
 
     if (!updatedLocation) return null;
 

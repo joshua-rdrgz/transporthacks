@@ -27,7 +27,7 @@ export const Match: React.FC<IMatchProps> = ({ match, status }) => {
   return (
     <section className='flex flex-col gap-9 bg-muted p-4 rounded'>
       <div className='flex flex-col gap-4 lg:flex-row lg:justify-between'>
-        <div className='flex flex-col gap-1 text-center'>
+        <div className='flex flex-col gap-1 text-center lg:text-left'>
           <h3 className='font-bold text-2xl'>{match.name}</h3>
           <p className='text-sm'>
             <strong>Email:</strong> {match.email}
@@ -38,7 +38,6 @@ export const Match: React.FC<IMatchProps> = ({ match, status }) => {
           <p className='text-sm'>
             <strong>End Point:</strong> {match.endAddress}
           </p>
-          <DisplayMap startPoint={match.startPoint} endPoint={match.endPoint} />
         </div>
         <div className='flex gap-3 items-center mx-auto'>
           <Button
@@ -56,6 +55,7 @@ export const Match: React.FC<IMatchProps> = ({ match, status }) => {
           <Button className='dark:text-foreground'>See Details</Button>
         </div>
       </div>
+      <DisplayMap startPoint={match.startPoint} endPoint={match.endPoint} />
       {status === 'potential' && (
         <div>
           <p className='text-sm'>

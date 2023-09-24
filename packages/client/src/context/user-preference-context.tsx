@@ -12,6 +12,12 @@ export type TUserPreferenceProps = {
   endPoint: TLocation;
   startPointAddress: string | null;
   endPointAddress: string | null;
+  carBuyingPrice?: string;
+  numDoors?: string;
+  numSeats?: string;
+  luggageBootSize?: string;
+  safetyRating?: string;
+  popularity?: string;
 };
 
 const UserPreferenceContext = createContext<TUserPreferenceProps | null>(null);

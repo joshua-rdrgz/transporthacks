@@ -24,11 +24,17 @@ model User {
 }
 
 model Preference {
-  id           String     @id @default(cuid())
-  userId       String     @unique
-  status       UserStatus @default(UNKNOWN)
-  startPointId String
-  endPointId   String
+  id              String     @id @default(cuid())
+  userId          String     @unique
+  status          UserStatus @default(UNKNOWN)
+  startPointId    String
+  endPointId      String
+  carBuyingPrice  Int?
+  numDoors        Int?
+  numSeats        Int?
+  luggageBootSize Int?
+  safetyRating    Int?
+  popularity      Int?
 
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   startPointR Location @relation("StartPoint", fields: [startPointId], references: [id], map: "startPointLocationId", onDelete: Cascade)

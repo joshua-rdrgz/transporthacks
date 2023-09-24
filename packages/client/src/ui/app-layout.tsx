@@ -30,8 +30,8 @@ export const AppLayout: React.FC<IAppPageLayoutProps> = async ({
         value={{
           userId: userPreference?.userId,
           status: userPreference?.status,
-          startPoint: startPoint,
-          endPoint: endPoint,
+          startPoint,
+          endPoint,
           startPointAddress: await getAddressFromLatLng(
             startPoint?.lat,
             startPoint?.lng
@@ -40,6 +40,12 @@ export const AppLayout: React.FC<IAppPageLayoutProps> = async ({
             endPoint?.lat,
             endPoint?.lng
           ),
+          carBuyingPrice: userPreference.carBuyingPrice?.toString(),
+          numDoors: userPreference.numDoors?.toString(),
+          numSeats: userPreference.numSeats?.toString(),
+          luggageBootSize: userPreference.luggageBootSize?.toString(),
+          safetyRating: userPreference.safetyRating?.toString(),
+          popularity: userPreference.popularity?.toString(),
         }}
       >
         <div className='grid grid-cols-[13rem_1fr] grid-rows-[auto_1fr] h-screen'>

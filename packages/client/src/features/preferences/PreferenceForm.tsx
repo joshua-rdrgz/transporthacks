@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCurrentUser } from '@/context/user-context';
 
@@ -17,15 +17,22 @@ import { Input } from '@/ui/input';
 import axios from 'axios';
 import { useUserPreferences } from '@/context/user-preference-context';
 import { useRouter } from 'next/navigation';
+import { DriverSection } from '@/features/preferences/DriverSection';
 
 const preferenceFormSchema = z.object({
   userId: z.string().nonempty('User Id is required'),
   status: z.enum(['DRIVER', 'COMMUTER', 'UNKNOWN']),
   startPoint: z.string().nonempty('Start point is required.'),
   endPoint: z.string().nonempty('End point is required.'),
+  carBuyingPrice: z.coerce.number(),
+  numDoors: z.coerce.number(),
+  numSeats: z.coerce.number(),
+  luggageBootSize: z.coerce.number(),
+  safetyRating: z.coerce.number(),
+  popularity: z.coerce.number(),
 });
 
-type PreferenceFormSchema = z.infer<typeof preferenceFormSchema>;
+export type PreferenceFormSchema = z.infer<typeof preferenceFormSchema>;
 
 const LOCATION_INPUTS = [
   {
@@ -43,6 +50,10 @@ export const PreferenceForm = () => {
   const currentUser = useCurrentUser();
   const curUserPreferences = useUserPreferences();
 
+  const [displayDriverFormInputs, setDisplayDriverFormInputs] = useState(
+    curUserPreferences.status === 'DRIVER'
+  );
+
   const preferenceForm = useForm<PreferenceFormSchema>({
     resolver: zodResolver(preferenceFormSchema),
     defaultValues: {
@@ -50,6 +61,12 @@ export const PreferenceForm = () => {
       status: curUserPreferences.status || 'COMMUTER',
       startPoint: curUserPreferences.startPointAddress || '',
       endPoint: curUserPreferences.endPointAddress || '',
+      carBuyingPrice: Number(curUserPreferences.carBuyingPrice),
+      numDoors: Number(curUserPreferences.numDoors),
+      numSeats: Number(curUserPreferences.numSeats),
+      luggageBootSize: Number(curUserPreferences.luggageBootSize),
+      safetyRating: Number(curUserPreferences.safetyRating),
+      popularity: Number(curUserPreferences.popularity),
     },
     mode: 'onChange',
   });
@@ -59,11 +76,15 @@ export const PreferenceForm = () => {
       const startPointLatlng = await getLatLngForAddress(values.startPoint);
       const endPointLatlng = await getLatLngForAddress(values.endPoint);
 
-      await axios.put('/api/preferences', {
+      console.log('values: ', values);
+
+      const res = await axios.put('/api/preferences', {
         ...values,
         startPoint: startPointLatlng,
         endPoint: endPointLatlng,
       });
+
+      console.log('res: ', res);
 
       router.refresh();
     },
@@ -72,6 +93,9 @@ export const PreferenceForm = () => {
 
   const handleRadioInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      setDisplayDriverFormInputs(
+        (e.target.value as 'DRIVER' | 'COMMUTER') === 'DRIVER'
+      );
       preferenceForm.setValue(
         'status',
         e.target.value as 'DRIVER' | 'COMMUTER'
@@ -82,12 +106,13 @@ export const PreferenceForm = () => {
 
   return (
     <div>
+      <h2 className='text-2xl font-semibold text-center'>You&apos;re a....</h2>
       <Form form={preferenceForm}>
         <form
           onSubmit={preferenceForm.handleSubmit(onSubmit)}
-          className='flex flex-col gap-5'
+          className='flex flex-col gap-8'
         >
-          <section className='flex gap-5'>
+          <section className='flex gap-5 justify-center'>
             <div className='flex gap-1 items-center'>
               <Label htmlFor='driver' className='text-lg'>
                 Driver
@@ -117,23 +142,38 @@ export const PreferenceForm = () => {
               />
             </div>
           </section>
-          {LOCATION_INPUTS.map((input) => {
-            return (
-              <Form.Field
-                key={input.value}
-                control={preferenceForm.control}
-                name={input.value}
-                render={({ field }) => {
-                  return <FormItem label={input.label} field={field} />;
-                }}
-              />
-            );
-          })}
+          <section>
+            {LOCATION_INPUTS.map((input) => {
+              return (
+                <Form.Field
+                  key={input.value}
+                  control={preferenceForm.control}
+                  name={input.value}
+                  render={({ field }) => {
+                    return <FormItem label={input.label} field={field} />;
+                  }}
+                />
+              );
+            })}
+          </section>
           {curUserPreferences.startPoint && curUserPreferences.endPoint && (
-            <DisplayMap
-              startPoint={curUserPreferences.startPoint}
-              endPoint={curUserPreferences.endPoint}
-            />
+            <section className='flex flex-col gap-3'>
+              <h3 className='text-xl font-semibold text-center'>
+                Here&apos;s Your Route
+              </h3>
+              <DisplayMap
+                startPoint={curUserPreferences.startPoint}
+                endPoint={curUserPreferences.endPoint}
+              />
+            </section>
+          )}
+          {displayDriverFormInputs && (
+            <div>
+              <DriverSection
+                preferenceForm={preferenceForm}
+                curUserPreferences={curUserPreferences}
+              />
+            </div>
           )}
           <Button type='submit'>Update Preferences</Button>
         </form>

@@ -31,6 +31,7 @@ export async function updateUserPreferences(
     const dbPreferences = await prisma.preference.findUnique({
       where: { userId },
     });
+    console.log('dbPreferences: ', dbPreferences);
 
     if (!dbPreferences) return null;
 
@@ -44,8 +45,16 @@ export async function updateUserPreferences(
       where: { userId },
       data: {
         status: updatedPreferences.status,
+        carBuyingPrice: updatedPreferences?.carBuyingPrice,
+        numDoors: updatedPreferences?.numDoors,
+        numSeats: updatedPreferences?.numSeats,
+        luggageBootSize: updatedPreferences?.luggageBootSize,
+        safetyRating: updatedPreferences?.safetyRating,
+        popularity: updatedPreferences?.popularity,
       },
     });
+
+    console.log('userPreferences: ', userPreferences);
 
     if (!userPreferences) return null;
 
