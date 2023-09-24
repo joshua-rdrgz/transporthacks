@@ -1,10 +1,6 @@
 'use client';
 
-import { useState } from 'react';
 import { PreferenceForm } from '@/features/preferences/PreferenceForm';
-import { TLatLng } from '@/lib/utils';
-import { TCurrentUser } from '@/services/apiAuth';
-import axios from 'axios';
 
 export const PreferencesClient = () => {
   return (
