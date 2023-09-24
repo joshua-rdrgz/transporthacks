@@ -55,7 +55,3 @@ export async function getAddressFromLatLng(lat?: number, lng?: number) {
 
   return formattedAddress;
 }
-
-export function allCapsToFirstLetterCapitalized(string: string) {
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
