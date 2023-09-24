@@ -82,11 +82,13 @@ const DRIVER_INPUTS = [
 interface IDriverSectionProps {
   preferenceForm: UseFormReturn<PreferenceFormSchema>;
   curUserPreferences: TUserPreferenceProps;
+  onDisplay: boolean;
 }
 
 export function DriverSection({
   preferenceForm,
   curUserPreferences,
+  onDisplay,
 }: IDriverSectionProps) {
   return (
     <section className='flex flex-col gap-5'>

@@ -24,12 +24,12 @@ const preferenceFormSchema = z.object({
   status: z.enum(['DRIVER', 'COMMUTER', 'UNKNOWN']),
   startPoint: z.string().nonempty('Start point is required.'),
   endPoint: z.string().nonempty('End point is required.'),
-  carBuyingPrice: z.coerce.number(),
-  numDoors: z.coerce.number(),
-  numSeats: z.coerce.number(),
-  luggageBootSize: z.coerce.number(),
-  safetyRating: z.coerce.number(),
-  popularity: z.coerce.number(),
+  carBuyingPrice: z.coerce.number().optional(),
+  numDoors: z.coerce.number().optional(),
+  numSeats: z.coerce.number().optional(),
+  luggageBootSize: z.coerce.number().optional(),
+  safetyRating: z.coerce.number().optional(),
+  popularity: z.coerce.number().optional(),
 });
 
 export type PreferenceFormSchema = z.infer<typeof preferenceFormSchema>;
@@ -172,6 +172,7 @@ export const PreferenceForm = () => {
               <DriverSection
                 preferenceForm={preferenceForm}
                 curUserPreferences={curUserPreferences}
+                onDisplay={displayDriverFormInputs}
               />
             </div>
           )}

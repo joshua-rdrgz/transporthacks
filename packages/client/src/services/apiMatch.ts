@@ -4,7 +4,6 @@ export const findBestDriver = async (
   startPoint: { lat: number; lng: number },
   endPoint: { lat: number; lng: number }
 ) => {
-  console.log('PYTHON URL: ', process.env.NEXT_PUBLIC_PYTHON_API_URL);
   const result = await axios.post(
     `${process.env.NEXT_PUBLIC_PYTHON_API_URL as string}/match_driver`,
     {

@@ -14,6 +14,8 @@ interface IDisplayMapProps {
   endPoint: Exclude<TLatLng, null>;
 }
 
+const defaultStartPoint = { lat: 40.7128, lng: -74.006 }; // New York City
+
 export const DisplayMap: React.FC<IDisplayMapProps> = ({
   startPoint,
   endPoint,
@@ -30,7 +32,7 @@ export const DisplayMap: React.FC<IDisplayMapProps> = ({
 
       directionsService.route(
         {
-          origin: startPoint,
+          origin: startPoint || defaultStartPoint,
           destination: endPoint,
           travelMode: window.google.maps.TravelMode.DRIVING,
         },
@@ -48,11 +50,11 @@ export const DisplayMap: React.FC<IDisplayMapProps> = ({
   return isLoaded ? (
     <GoogleMap
       mapContainerClassName='w-full h-60 rounded'
-      center={startPoint}
+      center={startPoint || defaultStartPoint}
       zoom={11}
     >
-      <MarkerF position={startPoint} />
-      <MarkerF position={endPoint} />
+      {startPoint && <MarkerF position={startPoint} />}
+      {endPoint && <MarkerF position={endPoint} />}
       {response !== null && (
         <DirectionsRenderer options={{ directions: response }} />
       )}
