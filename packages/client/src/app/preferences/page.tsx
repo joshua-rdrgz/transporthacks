@@ -1,3 +1,5 @@
-export default function PreferencesPage() {
-  return <div>Preferences Page</div>;
+import { PreferencesClient } from '@/app/preferences/PreferencesClient';
+
+export default async function PreferencesPage() {
+  return <PreferencesClient />;
 }

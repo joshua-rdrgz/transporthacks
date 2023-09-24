@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/ui/button';
+import { DisplayMap } from '@/ui/display-map';
 
 interface IMatch {
   name: string;
@@ -29,6 +30,7 @@ export const Match: React.FC<IMatchProps> = ({ match, status }) => {
           <p className='text-sm'>
             <strong>End Point:</strong> {match.endPoint}
           </p>
+          {/* <DisplayMap startPoint={match.startPoint} endPoint={match.endPoint} /> */}
         </div>
         <div className='flex gap-3 items-center mx-auto'>
           <Button

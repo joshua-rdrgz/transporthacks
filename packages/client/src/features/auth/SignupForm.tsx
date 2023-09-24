@@ -77,9 +77,9 @@ export const SignupForm = () => {
   const onSubmit = useCallback(
     async (values: SignupFormSchema) => {
       try {
-        axios.post('/api/register', values);
+        await axios.post('/api/register', values);
         toast.success('Registered!');
-        router.replace('/');
+        router.replace('/login');
       } catch (err) {
         toast.error('Something went wrong.... 🤔');
       } finally {

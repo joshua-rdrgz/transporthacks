@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { UserStatus } from '@prisma/client';
 
 const SALT_LENGTH = 12;
 export async function POST(request: Request) {
@@ -13,6 +14,23 @@ export async function POST(request: Request) {
       name,
       email,
       passwordHash,
+      preference: {
+        create: {
+          status: UserStatus.UNKNOWN,
+          startPointR: {
+            create: {
+              lat: 0,
+              lng: 0,
+            },
+          },
+          endPointR: {
+            create: {
+              lat: 0,
+              lng: 0,
+            },
+          },
+        },
+      },
     },
   });
 

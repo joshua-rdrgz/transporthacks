@@ -1,12 +1,6 @@
 'use client';
 
 import { Match } from '@/features/matches/Match';
-import { TCurrentUser } from '@/services/apiAuth';
-import axios from 'axios';
-
-interface IMatchesClientProps {
-  currentUser: TCurrentUser;
-}
 
 const DUMMY_POTENTIAL_MATCHES = [
   {
@@ -38,16 +32,7 @@ const DUMMY_OFFICIAL_MATCHES = [
   },
 ];
 
-export const MatchesClient: React.FC<IMatchesClientProps> = ({
-  currentUser,
-}) => {
-  const onClick = async () => {
-    const result = await axios.post('/api/maintenance', {
-      test: 'this is from the client.',
-    });
-    console.log(result);
-  };
-
+export const MatchesClient = () => {
   return (
     <>
       {/* Find a {BLANK = 'Driver' | 'Commuter'} */}

@@ -9,8 +9,9 @@ generator client {
 }
 
 enum UserStatus {
-  driver
-  commuter
+  DRIVER
+  COMMUTER
+  UNKNOWN
 }
 
 model User {
@@ -23,14 +24,15 @@ model User {
 }
 
 model Preference {
-  userId       String     @id
-  status       UserStatus
+  id           String     @id @default(cuid())
+  userId       String     @unique
+  status       UserStatus @default(UNKNOWN)
   startPointId String
   endPointId   String
 
-  user       User     @relation(fields: [userId], references: [id])
-  startPoint Location @relation("StartPoint", fields: [startPointId], references: [id], map: "startPointLocationId")
-  endPoint   Location @relation("EndPoint", fields: [endPointId], references: [id], map: "endPointLocationId")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  startPointR Location @relation("StartPoint", fields: [startPointId], references: [id], map: "startPointLocationId", onDelete: Cascade)
+  endPointR   Location @relation("EndPoint", fields: [endPointId], references: [id], map: "endPointLocationId", onDelete: Cascade)
 
   @@index([userId])
   @@index([startPointId])
