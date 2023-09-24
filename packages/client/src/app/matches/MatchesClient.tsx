@@ -1,8 +1,6 @@
 'use client';
 
-import { useUserPreferences } from '@/context/user-preference-context';
 import { IMatch, Match } from '@/features/matches/Match';
-import { allCapsToFirstLetterCapitalized } from '@/lib/utils';
 
 const DUMMY_POTENTIAL_MATCHES = [
   {
